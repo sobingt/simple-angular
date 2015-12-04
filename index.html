@@ -1,0 +1,12 @@
+<!doctype html>
+<html ng-app>
+  <head>
+  </head>
+  <body>
+    <input type="text" ng-model="name" placeholder="What is your Name?">
+    <h3 ng-if="name">Hello {{name}}</h3>
+    <input type="text" ng-model="age" placeholder="Age?">
+    <h5>Your Number is {{(age*45-34)/2}}</h5>
+    <script src="vendor/angularjs/angular.js"></script>
+  </body>
+</html>

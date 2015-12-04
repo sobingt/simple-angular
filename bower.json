@@ -1,0 +1,22 @@
+{
+  "name": "simple-angular",
+  "version": "0.1.0",
+  "authors": [
+    "Sobin George Thomas <sobingt@gmail.com>"
+  ],
+  "description": "simple angularjs project",
+  "main": "app.js",
+  "keywords": [
+    "simple",
+    "angularjs",
+    "project"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
