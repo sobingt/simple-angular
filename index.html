@@ -1,13 +1,21 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
   </head>
   <body>
         <div class="container" ng-controller="Ctrl">
+          <input type="text" ng-model="search">
             <ul>
-              <li ng-repeat="person in people">{{person.name}} ,  {{person.age}} <a ng-click="edit($index)">edit</a> <a ng-click="remove($index)">X</a></li>
+              <li ng-repeat="person in people | filter: {age: search}" class="row-{{$first}} | orderBy: 'name'">
+                {{person.name}} ,  {{person.age}} 
+                <a ng-click="edit($index)">edit</a> 
+                <a ng-click="remove($index)">X</a>
+                <span ng-show="$first">First</span>
+                <span ng-show="$middle">Middle</span>
+                <span ng-show="$last">Last</span>
+              </li>
             </ul>
           <label>Name</label>
           <input type="text" ng-model="person.name">
@@ -18,44 +26,62 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     <script>
-
-        var Ctrl = function( $scope ) {
-            console.log($scope);
-            $scope.addStatus = true;
-            $scope.name = "Rafal";
-            $scope.age = "28";
-            $scope.persons=['Tom', 'Jerry']; 
-            $scope.people =[
+    //Added Array in controller function for minification
+    angular.module('myApp',[])
+    .controller('Ctrl',['$scope', function(scope){
+        console.log(scope);
+            scope.addStatus = true;
+            scope.name = "Rafal";
+            scope.age = "28";
+            scope.persons=['Tom', 'Jerry']; 
+            scope.people =[
               {
                 name: "Sobin", 
                 age: 23
+              },
+              {
+                name: "Darshan",
+                age: 74
+              },
+              {
+                name: "Prath",
+                age: 20
+              },
+              {
+                name: "Surya",
+                age: 28
               },
               {
                 name: "Hari",
                 age: 13
               }
             ];
-          $scope.add = function(){
-            $scope.people.push($scope.person);
-            $scope.person ={};
+          scope.add = function(){
+            scope.people.push(scope.person);
+            scope.person ={};
           };
-          $scope.remove = function(index){
-             $scope.people.splice(index, 1);
+          scope.remove = function(index){
+             scope.people.splice(index, 1);
           };
-          $scope.edit = function(index){
-            $scope.addStatus = false;
-            $scope.person = $scope.people[index];
-            $scope.person.index = index;
-          
+          scope.edit = function(index){
+            scope.addStatus = false;
+            scope.person = scope.people[index];
           };
-          $scope.save = function(){
-            $scope.addStatus = true;
-            $scope.people[$scope.person.index]= $scope.person;
-            $scope.person = [];
+          scope.save = function(){
+            scope.addStatus = true;
+            scope.person = [];
           };
           
           
-        };
+      
+    }]);
+//    angular.module('myApp',[])
+//    .controller('Ctrl',function(scope){
+//      
+//    });
+//        var Ctrl = function( scope ) {
+//          
+//        };
     </script>
   </body>
 </html>
