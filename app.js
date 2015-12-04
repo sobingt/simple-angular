@@ -10,12 +10,38 @@
     .filter('slug', function(){
       
       return function(input, sign){
-          return input.toLowerCase()
-						.replace(/\s+/g,(sign || '-'));
+          return input+' st'
       }
       
     })
-    .controller('FilterCtrl',['$scope','$routeParams', function(scope, routeParams){
-      scope.name = "The Good Goa Cat";
+    .directive('click', [function () {
+      return {
+          restrict: 'A',
+          link: function (scope, iElement, iAttrs) {
+              iElement.bind('click', function(){
+                  scope.$eval(iAttrs.click);
+              });
+          }
+      };
+    }])
+    .directive('myCard', [function () {
+      return {
+          restrict: 'E',
+		  replace: true,
+		  transclude: true,
+		  template: '<div class="card">Hello Card</card>',
+          link: function (scope, iElement, iAttrs) {
+              iElement.bind('click', function(){
+                  scope.$eval(iAttrs.click);
+              });
+          }
+      };
+    }])
+    .controller('FilterCtrl',['$scope','$routeParams', function(scope, routeParams)
+	{
+		scope.name = "The Good Goa Cat";
+		scope.a = function(){
+			console.log("The Bad Boys");
+		};
     }]);
 
