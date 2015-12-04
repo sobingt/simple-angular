@@ -1,29 +1,27 @@
 <!doctype html>
 <html ng-app>
   <head>
+    <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap-theme.css">
   </head>
   <body>
-        <div ng-controller="Ctrl">
-            <h1>{{name}}</h1>
-            <h2>{{age}}</h2>
-            <div ng-repeat="person in persons"><input type="text" ng-model="persons[$index]"></div>
-            <br>
-            <br>
-            <br>
-                <input type="text" ng-model="persons[0]">
+        <div class="container" ng-controller="Ctrl">
             <ul>
-              <li ng-repeat="person in persons">{{person}}</li>
+              <li ng-repeat="person in people">{{person.name}} ,  {{person.age}} <a ng-click="edit($index)">edit</a> <a ng-click="remove($index)">X</a></li>
             </ul>
-            <ul>
-              <li ng-repeat="person in people">{{person.name}} ,  {{person.age}}</li>
-            </ul>
+          <label>Name</label>
+          <input type="text" ng-model="person.name">
+          <label>Age</label>
+          <input type="number" ng-model="person.age">
+          <a ng-show="addStatus" class="btn btn-primary" ng-click="add()">Add</a>
+          <a ng-hide="addStatus" class="btn btn-primary" ng-click="save()">Edit</a>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-    </body>
     <script>
 
         var Ctrl = function( $scope ) {
             console.log($scope);
+            $scope.addStatus = true;
             $scope.name = "Rafal";
             $scope.age = "28";
             $scope.persons=['Tom', 'Jerry']; 
@@ -36,7 +34,26 @@
                 name: "Hari",
                 age: 13
               }
-            ]
+            ];
+          $scope.add = function(){
+            $scope.people.push($scope.person);
+            $scope.person ={};
+          };
+          $scope.remove = function(index){
+             $scope.people.splice(index, 1);
+          };
+          $scope.edit = function(index){
+            $scope.addStatus = false;
+            $scope.person = $scope.people[index];
+            $scope.person.index = index;
+          
+          };
+          $scope.save = function(){
+            $scope.addStatus = true;
+            $scope.people[$scope.person.index]= $scope.person;
+            $scope.person = [];
+          };
+          
           
         };
     </script>
