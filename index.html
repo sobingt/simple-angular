@@ -14,6 +14,9 @@
             <ul>
               <li ng-repeat="person in persons">{{person}}</li>
             </ul>
+            <ul>
+              <li ng-repeat="person in people">{{person.name}} ,  {{person.age}}</li>
+            </ul>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     </body>
@@ -23,7 +26,18 @@
             console.log($scope);
             $scope.name = "Rafal";
             $scope.age = "28";
-            $scope.persons=['Tom', 'Jerry']
+            $scope.persons=['Tom', 'Jerry']; 
+            $scope.people =[
+              {
+                name: "Sobin", 
+                age: 23
+              },
+              {
+                name: "Hari",
+                age: 13
+              }
+            ]
+          
         };
     </script>
   </body>
