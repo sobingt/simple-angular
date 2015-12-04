@@ -3,10 +3,35 @@
   <head>
   </head>
   <body>
-    <input type="text" ng-model="name" placeholder="What is your Name?">
-    <h3 ng-if="name">Hello {{name}}</h3>
-    <input type="text" ng-model="age" placeholder="Age?">
-    <h5>Your Number is {{(age*45-34)/2}}</h5>
-    <script src="vendor/angularjs/angular.js"></script>
+        <div ng-controller="Ctrl">
+            <input type="text" ng-model="name">
+            <h1>{{name}}</h1>
+            <h2>{{age}}</h2>
+        </div>
+        <div ng-controller="AnotherCtrl">
+            <input type="text" ng-model="name">
+            <h1>{{name}}</h1>
+            <h2>{{age * 2}}</h2>
+        </div>
+        <script src="vendor/angularjs/angular.js"></script>
+    </body>
+    <script>
+
+        var Ctrl = function( $scope ) {
+            console.log($scope);
+            $scope.name = "Rafal";
+            $scope.age = "28";
+        };
+
+        var AnotherCtrl = function( $scope ) {
+            console.log($scope);
+            $scope.name = "Tom";
+            $scope.age = "20";
+            $scope.$watch('name', function() {
+                console.log($scope.name);
+            });
+        };
+
+    </script>
   </body>
 </html>
