@@ -4,16 +4,18 @@
   </head>
   <body>
         <div ng-controller="Ctrl">
-            <input type="text" ng-model="name">
             <h1>{{name}}</h1>
             <h2>{{age}}</h2>
+            <div ng-repeat="person in persons"><input type="text" ng-model="persons[$index]"></div>
+            <br>
+            <br>
+            <br>
+                <input type="text" ng-model="persons[0]">
+            <ul>
+              <li ng-repeat="person in persons">{{person}}</li>
+            </ul>
         </div>
-        <div ng-controller="AnotherCtrl">
-            <input type="text" ng-model="name">
-            <h1>{{name}}</h1>
-            <h2>{{age * 2}}</h2>
-        </div>
-        <script src="vendor/angularjs/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     </body>
     <script>
 
@@ -21,17 +23,8 @@
             console.log($scope);
             $scope.name = "Rafal";
             $scope.age = "28";
+            $scope.persons=['Tom', 'Jerry']
         };
-
-        var AnotherCtrl = function( $scope ) {
-            console.log($scope);
-            $scope.name = "Tom";
-            $scope.age = "20";
-            $scope.$watch('name', function() {
-                console.log($scope.name);
-            });
-        };
-
     </script>
   </body>
 </html>
